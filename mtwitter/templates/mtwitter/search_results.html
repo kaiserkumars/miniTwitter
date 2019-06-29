@@ -1,0 +1,30 @@
+{% extends 'mtwitter/base.html' %}
+<!-- <h1>Hello</h1> -->
+
+{% block content %}
+
+<h4 >Tweets containing '{{ query_string }}'</h4>
+
+<div class="block social-block social-twitter">
+    {% load twitter_tags %}
+    <ul>
+        {% for tweet in tweets %}
+        <li>
+            <div class="tweet-meta">
+                <a href="https://www.twitter.com/{{ tweet.screen_name }}/status/{{ tweet.id }}" target="_blank">
+                  <div>
+                    <img src="{{ tweet.profile_url }}" width="32" height="32" />
+                    <h6>{{ tweet.org_name }}<br /><span>@{{ tweet.screen_name }} &middot; {{ tweet.date }}</span></h6></div>
+                </a>
+           
+            <p>{{ tweet.tweet}}</p>
+            <a href="#" class="btn btn-round btn-red">Add to favourite</a>
+             </div>
+        </li>
+        <br>
+        {% endfor %}
+
+    </ul>
+</div>
+
+{% endblock %}

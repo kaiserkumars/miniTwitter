@@ -1,0 +1,71 @@
+{% extends 'mtwitter/base.html' %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+
+<div style="background-color:  #add8e6; width: 430px; float: left">
+  <form id="searchForm" action="{% url 'search_results' %}" method="get">
+      <input name="q" type="text" class="form-control" ng-model="search" placeholder="Search Tweets" style="width: 75%;  display: inline-block; margin-left: 0px;"/>
+      <button class="btn btn-round btn-red" value="search" type="submit" onclick="searchForm.submit()" style=" margin-left: 5px; margin-right: 10px; display: inline-block; float: right; margin-top: 5px">Search</button>
+      </form>
+
+    </div>
+
+
+
+    <div div style="float: none;overflow: hidden; background-color:  #add8e6; margin-left: 5px">
+      <input id="datepicker1" placeholder="end date" style="width:150px;float: right; margin-left:10px;display: inline-block; margin-right: 12px" />
+ 
+    <script>
+        $('#datepicker1').datepicker();
+    </script>
+      <input id="datepicker2" placeholder="start date" style="width:150px;float:right;margin-left:30px;display: inline-block;" />
+<script>
+        $('#datepicker2').datepicker();
+    </script>
+
+
+ <button style="float: right; margin-right: 50px;display: inline-block; margin-top: 5px;" class="btn btn-round btn-red" value="search" type="submit" onclick="#">Filter</button>
+
+</div>
+<br>
+<!-- <div style="margin-right: 200px;" >
+<input id="datepicker" style="width:150px;float:right;margin-right:0px;" />
+<script>
+        $('#datepicker').datepicker();
+    </script>
+<input id="datepicker2" style="width:150px;float: right; margin-right: 10px" />
+ 
+    <script>
+        $('#datepicker2').datepicker();
+    </script>
+  </div> -->
+   <!-- <button style="position: relative; top: 60px; left: 540px"class="btn btn-round btn-red" value="search" type="submit" onclick="#" style=" margin-left: 10px;">Filter</button> -->
+
+<div class="block social-block social-twitter" style="margin-top: 20px;">
+    {% load twitter_tags %}
+    <ul>
+        {% for tweet in tweets %}
+        <li>
+            <div class="tweet-meta">
+                <a href="https://www.twitter.com/{{ tweet.user.screen_name }}/status/{{ tweet.id }}" target="_blank">
+                  <div>
+                    <img src="{{ tweet.user.profile_image_url }}" width="32" height="32" />
+                    <h6>{{ tweet.user.name }}<br /><span>@{{ tweet.user.screen_name }} &middot; {{ tweet.created_at|twitter_date }}</span></h6></div>
+                </a>
+           
+            <p>{{ tweet.text}}</p>
+            <a href="#" class="btn btn-round btn-red">Add to favourite</a>
+             </div>
+        </li>
+        <br>
+        {% endfor %}
+
+    </ul>
+   <!--  <a href="#" class="btn btn-round btn-red">Add to favourite</a>
+</div>
+
+{% endblock %}

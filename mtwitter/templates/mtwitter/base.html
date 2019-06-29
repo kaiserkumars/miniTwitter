@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/angular.min.js' %}"></script>
+<script src="{% static 'js/angular-resource.min.js' %}"></script>
+ <script src="{% static 'js/app.js' %}"></script> -->
+<script src="{% static 'js/jquery.highlight.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tweets</title>
+
+<style type="text/css">
+    .sidebar-nav {
+    margin: 0;
+    padding: 0;
+    float:left;
+    list-style: none;
+}
+</style>
+    
+    
+</head>
+
+<body >
+<header class="container center-align"><h2 class="center-align red lighten-3">mini Twitter</h2>
+    </header>
+    <div style="max-width: 100px; margin-right: 0px">
+    {% block sidebar %}
+        <ul class="sidebar-nav">
+          <li><a href="{% url 'home' %}">Home</a></li>
+            <li>Hi {{ user.username }}!</li>
+            <li><a href="{% url 'logout'%}?next={{request.path}}">logout</a></li>
+        </ul>
+
+     {% endblock %}
+    </div>
+
+    
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+        <br>
+    </div>
+    <!-- <div style="text-align:center;">
+    Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">logout</a></p></div> -->
+</body>
+<script>
+    $("body").highlight("{{query_string}}");
+    $(".highlight").css({ backgroundColor: "#FFFF88" });
+</script>
+</html>
